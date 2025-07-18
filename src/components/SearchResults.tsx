@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { mockBooks } from '@/data/mockData';
 import BookGrid from '@/components/BookGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,7 +13,7 @@ interface SearchResultsProps {
 
 export default function SearchResults({ searchQuery, onClose }: SearchResultsProps) {
   const [filteredBooks, setFilteredBooks] = useState(mockBooks);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     if (!searchQuery.trim()) {
@@ -34,7 +34,7 @@ export default function SearchResults({ searchQuery, onClose }: SearchResultsPro
   }, [searchQuery]);
 
   const handleBookClick = (bookId: string) => {
-    navigate(`/book/${bookId}`);
+    router.push(`/book/${bookId}`);
     onClose();
   };
 
